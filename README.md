@@ -2,7 +2,7 @@
 Long Nguyen, Ming-Shih Wang
 
 ## Introduction:
-This project aims to fine-tune and optimize a method to generate accurate predictions for the toxicity of molecules in the Tox21 dataset. Although we spent the majority of our time using data manipulation for data imbalances, fine-tuning, and trying different methods and models, due to time constraints, we were unable to find a way to overcome the hurdle of a 0.7855% validation score.
+This project aims to fine-tune and optimize a method to generate accurate predictions for the toxicity of molecules in the Tox21 dataset. Although we spent the majority of our time using data manipulation for data imbalances, fine-tuning, and trying different methods and models, given a week, we were unable to find a way to overcome the hurdle of a 0.7855% validation score.
 
 ## Contributions
 Long Nguyen, Ming-Shih Wang: data preprocessing, model fine-tuning, different-model searching, report, training and testing
@@ -16,9 +16,9 @@ The data was extremely imbalanced — the 0:1 proportion was close to 0.95% for 
 
 Given this is a multi-label classification problem, the distribution of the 12 labels in each data entry is dependent on each other; Which means that simply replicating the minority class would not produce a balanced distribution. Therefore, through trial and error, we found the best combination of data to replicate, which produced fairly balanced data as shown in the graphs below.
 
-Before oversampling 	After oversampling
+*Before oversampling* 	<---->   *After oversampling*
 
-<img width="240" alt="Screen Shot 2023-12-25 at 3 35 07 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/7d939dba-a1d7-4b31-94ba-268e2f874dd4">
+<img width="260" alt="Screen Shot 2023-12-25 at 3 35 07 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/7d939dba-a1d7-4b31-94ba-268e2f874dd4">
 
 <img width="240" alt="Screen Shot 2023-12-25 at 3 35 02 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/f9f32cab-8a56-4b6d-ad4a-188d161879f7">
 
@@ -52,7 +52,7 @@ However, we continued to hit a plateau of around 78.98% with these models and co
 In the end, we used the model shown above, with a combination of Graph Convolutional Layers, Batch 
 Normalizations, Linears, and layers that utilize the fingerprint data. The most optimal hyperparameters were found to be: 
 
-hidden_channels = 32, dropout_rate = 0.6, fingerprint_dim = 8192, num_node_features = 9
+*hidden_channels = 32, dropout_rate = 0.6, fingerprint_dim = 8192, num_node_features = 9*
 
 ## Conclusion and Takeaways
 All in all, this project was much harder than expected. Admittedly, if there was more time, we would spend more of it understanding the fundamentals of the complex data, as all the efforts of preprocessing with the imbalances, data concatenation, smiles, and molecular data, and all the model and hyperparameter optimization only resulted in a negligible increase in AUC-ROC score. Ultimately, we learned that the APIs of Pytorch, Keras, and scikit-learn make it accessible and quite easy to implement machine learning models and techniques, truly understanding the data, the intricacies of how models work is crucial in achieving a high success rate.
