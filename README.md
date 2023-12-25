@@ -20,7 +20,7 @@ Given this is a multi-label classification problem, the distribution of the 12 l
 
 <img width="260" alt="Screen Shot 2023-12-25 at 3 35 07 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/7d939dba-a1d7-4b31-94ba-268e2f874dd4">
 
-<img width="240" alt="Screen Shot 2023-12-25 at 3 35 02 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/f9f32cab-8a56-4b6d-ad4a-188d161879f7">
+<img width="250" alt="Screen Shot 2023-12-25 at 3 35 02 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/f9f32cab-8a56-4b6d-ad4a-188d161879f7">
 
 
 ### Integrating SMILES and Molecular Data
