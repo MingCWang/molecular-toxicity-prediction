@@ -11,13 +11,16 @@ Long Nguyen, Ming-Shih Wang: data preprocessing, model fine-tuning, different-mo
 
 ### Balancing Each Property Individually:
 The data was extremely imbalanced — the 0:1 proportion was close to 0.95% for some, and so we focused much of our time on accounting for this, as this was a likely contributor to the overfitting of our model. The key is to resample in a way that improves the representation of underrepresented labels without significantly distorting the distribution of other labels. Here is our approach. 
+
 <img width="349" alt="Screen Shot 2023-12-25 at 3 34 55 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/5273ee2d-3ecb-4833-9186-b68316120ae3">
 
 Given this is a multi-label classification problem, the distribution of the 12 labels in each data entry is dependent on each other; Which means that simply replicating the minority class would not produce a balanced distribution. Therefore, through trial and error, we found the best combination of data to replicate, which produced fairly balanced data as shown in the graphs below.
+
+Before oversampling 	
 <img width="233" alt="Screen Shot 2023-12-25 at 3 35 07 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/7d939dba-a1d7-4b31-94ba-268e2f874dd4">
+After oversampling
 <img width="239" alt="Screen Shot 2023-12-25 at 3 35 02 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/f9f32cab-8a56-4b6d-ad4a-188d161879f7">
 
-                 	Left: Before oversampling 				  Right: After oversampling
 
 ### Integrating SMILES and Molecular Data
 Another issue we thought was the cause of overfitting, in addition to the “12-task” imbalance was the lack of data. To account for this, we tried adding more features using the rdkit to utilize SMILES and Molecular data. 
@@ -31,6 +34,7 @@ By using RDKit and MolVS libraries, the code standardizes molecules from their S
 To account for data imbalance, we also calculated the weights in each label class respectively. 
 The original loss calculation simply converts the two-dimensional toxicity label dataset into a huge single-dimension array while excluding all the nan values. This would not work if class weights were applied, we were experiencing dimension mismatches because of the missing values. To account for the dimension difference, because the labels are in a binary format that represents the absence of the property associated with the label, I replaced nan values with 0. 
 After class weights calculation, I applied them to a custom loss calculation function using the BCEWithLogitsLoss()function that works better with binary values.
+
 <img width="308" alt="Screen Shot 2023-12-25 at 3 35 29 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/7d7aa4c6-f382-4708-bf2b-77b4bd60de0b">
 <img width="319" alt="Screen Shot 2023-12-25 at 3 35 36 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/c1ebadac-d85b-4804-b4ed-5311c5f90224">
 
@@ -41,8 +45,11 @@ Needless to say, our optimizations did not stop in preprocessing, as we implemen
 - Hyperparameters: dropout_rate, fingerprint_dim, num_classes, hidden_classes, num_rdkit_features
 
 However, we continued to hit a plateau of around 78.98% with these models and combinations of layers and hyperparameter tuning. 
+
 <img width="271" alt="Screen Shot 2023-12-25 at 3 35 46 PM" src="https://github.com/MingCWang/molecular-toxicity-prediction/assets/73949957/984ac07a-a137-42b4-abba-a21934feaae7">
-In the end, we used the model shown above, with a combination of Graph Convolutional Layers, Batch Normalizations, Linears, and layers that utilize the fingerprint data. The most optimal hyperparameters were found to be: 
+
+In the end, we used the model shown above, with a combination of Graph Convolutional Layers, Batch 
+Normalizations, Linears, and layers that utilize the fingerprint data. The most optimal hyperparameters were found to be: 
 
 hidden_channels = 32, dropout_rate = 0.6, fingerprint_dim = 8192, num_node_features = 9
 
