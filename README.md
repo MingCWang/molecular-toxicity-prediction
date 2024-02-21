@@ -1,5 +1,5 @@
 ## Introduction:
-This project aims to fine-tune and optimize a method to generate accurate predictions for the toxicity of molecules in the Tox21 dataset. Although we spent the majority of our time using data manipulation for data imbalances, fine-tuning, and trying different methods and models, given a week, we were unable to find a way to overcome the hurdle of a 0.7855% validation score.
+Provided a baseline GCN model for predicting the toxicity of new molecules, this project experiments a variety of methods and models to outperform the baseline model. Although we spent the majority of our time using data manipulation for data imbalances, fine-tuning, and trying different methods and models, given a week, we were unable to find a way to overcome the hurdle of a 0.7855% validation score. Here represents what we learned throughout the process
 
 ## Contributions
 Long Nguyen, Ming-Shih Wang: data preprocessing, model fine-tuning, different-model searching, report, training and testing
